@@ -27,39 +27,36 @@ double area (struct triangle t)
     return s;
 }
 
-double distance (struct point a, struct point b);
+double line_length (struct point a, struct point b);
 
-double distance (struct point a, struct point b)
+double line_length (struct point a, struct point b)
 {
-    double line = sqrt(fabs ((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)));
+    double l =
+        sqrt (fabs ((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)));
 
-    return line;
+    return l;
 }
 
 double perimeter (struct triangle t);
-
 double perimeter (struct triangle t)
 {
-    double p = (distance (t.a , t.b)) + (distance (t.a , t.c)) + (distance (t.b , t.c));
+    double p =
+        line_length (t.a, t.b) + line_length (t.b, t.c) + line_length (t.c,
+        t.a);
 
     return p;
 }
 
-
 int main (void)
 {
-    struct triangle t = (struct triangle) { {0, 0.}, {3., 0}, {0., 4.} };
+    struct triangle t = (struct triangle) { {2., 2.}, {-2., 1.}, {0., -3.} };
 
     double a = area (t);
-
     double p = perimeter (t);
-    
-    double r = ((2 * a) / p) ;
-    double d = distance (t.a , t.b);
-    printf("distance = %d\n" , d);
- 
-    printf("radius = %d\n", r);
-    printf("perimeter = %d\n", p);
+    double r = ((2 * a) / p);
+
+    printf ("Radius of inscribed circle = %f\n", r);
+
 
     return 0;
 }

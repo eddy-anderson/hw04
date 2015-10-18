@@ -1,30 +1,29 @@
-#
-# Download and place this file into your git repository. 
-# Rename it to 'Makefile' (without quotes)
-#
-# wget http://www.phys.uconn.edu/phys2200/downloads/Makefile.sample
-# mv Makefile.sample Makefile
-#
-# or
-#
-# wget http://www.phys.uconn.edu/phys2200/downloads/Makefile.sample -O Makefile
-#
 
-EDITOR = /usr/bin/vim
+
+EDITOR = /usr/bin/gedit
 INDENT = /usr/bin/indent
 
 CC        = clang
-LDFLAGS   = -O
-CFLAGS    = -Weverything -Wextra -pedantic $(LDFLAGS)
+LDFLAGS   = -o
+Libs      = -lm
+CFLAGS    = -Weverything $(LDFLAGS)
+SOURCES   = indented_circle.c
+EXECUTABLE= indented_circle
+OBJECTS=$(SOURCES:.c=.o)
 
 .SUFFIXES:
 .SUFFIXES:  .c .o .h
 
 .PHONY: edit clean veryclean
 
-target    = area
+target    = inscribed_circle
 
-$(target) : $(target).c
+all: $(target)
+
+$(target): $(target).c
+	$(CC) $(target).c $(CFLAGS) $(target) $(Libs)\
+	
+    
 
 edit : $(target).c
 	$(EDITOR) $<
